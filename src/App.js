@@ -1,21 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import { Route, Switch, withRouter, Router, Redirect } from 'react-router-dom';
+import SignUp from './containers/SignUp/SignUp';
+import SignIn from './containers/SignIn/SignIn';
+import Todos from './containers/Todos/Todos';
+import * as actions from './store/actions/index';
 
 class App extends Component {
   render() {
+    this.props.onTryAutoSignup();
+
+    let routes = (
+      <Switch>
+        <Route path='/sign_up' component={SignUp} />
+        <Route path='/sign_in' component={SignIn} />
+        <Route path='/' component={Todos} />
+        <Redirect to="/sign_up" />
+      </Switch>
+    );
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        {routes}
       </div>
     );
   }
 }
 
-export default App;
+// const mapStateToProps = state => {
+//   return {
+//     isAuthenticated: state.auth.token !== null
+//   };
+// };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoSignup: () => dispatch(actions.authCheckState())
+  };
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(App));
