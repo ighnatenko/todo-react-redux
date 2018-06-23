@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as constants from '../../constants';
 
 export const setHeadersStore = (response) => {
-  if (response.headers['access-token'] != '') {
+  if (response.headers['access-token'] !== '') {
     localStorage.setItem('access-token', response.headers['access-token']);
   }
   localStorage.setItem('client', response.headers['client']);

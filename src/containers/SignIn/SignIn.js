@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
-import classes from './SignIn.css';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class SignIn extends Component {
   state = {
@@ -12,7 +10,7 @@ class SignIn extends Component {
   }
 
   componentDidMount() {
-    if (this.props.token !== null) {
+    if (this.props.isAuthenticated) {
       this.props.onSetAuthRedirectPath();
     }
   }
@@ -43,9 +41,7 @@ class SignIn extends Component {
 
     let errorMessage = null;
     if (this.props.error !== null) {
-      errorMessage = (
-        <p>{this.props.error}</p>
-      );
+      errorMessage = <p>{this.props.error}</p>;
     }
 
     let spinner = null; 
@@ -61,7 +57,7 @@ class SignIn extends Component {
         <form onSubmit={this.submitHandler}>
           <input value={this.state.email} onChange={(event) => this.inputChangedHandler(event, 'email')} />
           <input value={this.state.password} onChange={(event) => this.inputChangedHandler(event, 'password')} />
-          <Button btnType="Success">SUBMIT</Button>
+          <button>SUBMIT</button>
         </form>
       </div>
     );
@@ -70,10 +66,10 @@ class SignIn extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.signin.loading,
-    error: state.signin.error,
-    isAuthenticated: state.signin.token !== null,
-    authRedirectPath: state.signin.authRedirectPath
+    loading: state.auth.loading,
+    error: state.auth.error,
+    isAuthenticated: state.auth.token !== null,
+    authRedirectPath: state.auth.authRedirectPath
   };
 };
 

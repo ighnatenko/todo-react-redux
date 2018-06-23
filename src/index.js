@@ -7,16 +7,18 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import signUpReducer from './store/reducers/signup';
-import signInReducer from './store/reducers/signin';
-import todosReducer from './store/reducers/todos';
+import projectsReducer from './store/reducers/projects';
+import tasksReducer from './store/reducers/tasks';
+import authReducer from './store/reducers/auth';
+import commentsReducer from './store/reducers/comments';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  signup: signUpReducer,
-  signin: signInReducer,
-  todos: todosReducer
+  auth: authReducer,
+  projects: projectsReducer,
+  tasks: tasksReducer,
+  comments: commentsReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
@@ -26,7 +28,7 @@ const store = createStore(rootReducer, composeEnhancers(
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <App className='container' />
     </BrowserRouter>
   </Provider>
 );

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
-import classes from './SignUp.css';
 
 class SignUp extends Component {
   state = {
@@ -47,9 +45,7 @@ class SignUp extends Component {
 
     let errorMessage = null;
     if (this.props.error !== null) {
-      errorMessage = (
-        <p>{this.props.error}</p>
-      );
+      errorMessage = <p>{this.props.error}</p>;
     }
 
     let spinner = null; 
@@ -66,14 +62,12 @@ class SignUp extends Component {
           <input value={this.state.email} onChange={(event) => this.inputChangedHandler(event, 'email')} />
           <input value={this.state.password} onChange={(event) => this.inputChangedHandler(event, 'password')} />
           <input value={this.state.confirm_password} onChange={(event) => this.inputChangedHandler(event, 'confirm_password')} />
-          <Button btnType="Success">SUBMIT</Button>
+          <button btnType="Success">SUBMIT</button>
         </form>
 
         <Link to='/sign_in'>SignIn</Link>
         <br />
         <Link to='/todos'>Todos</Link>
-
-        
       </div>
     );
   }
@@ -81,10 +75,10 @@ class SignUp extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.signup.loading,
-    error: state.signup.error,
-    isAuthenticated: state.signup.token !== null,
-    authRedirectPath: state.signup.authRedirectPath
+    loading: state.auth.loading,
+    error: state.auth.error,
+    isAuthenticated: state.auth.token !== null,
+    authRedirectPath: state.auth.authRedirectPath
   };
 };
 

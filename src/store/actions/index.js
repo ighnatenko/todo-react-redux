@@ -1,24 +1,27 @@
 export {
   signUp,
-  setAuthRedirectPath
-} from './signUp';
-
-export {
-  signIn
-  // setAuthRedirectPath
-} from './signIn';
-
-export {
+  signIn,
+  setAuthRedirectPath, 
   authCheckState
 } from './auth';
 
 export {
-  addTodo,
-  fetchTodos,
-  deleteTodoItem,
-  editTodoItem
-} from './todos';
+  addProjectItem,
+  fetchProjects,
+  deleteProjectItem,
+  editProjectItem
+} from './projects';
 
 export {
-  fetchTasks
-} from './project';
+  fetchTasks,
+  addTaskItem,
+  deleteTaskItem,
+  editTaskItem,
+  sortingTaskItems
+} from './tasks';
+
+export {
+  fetchComments,
+  addComment,
+  deleteCommentItem
+} from './comments';

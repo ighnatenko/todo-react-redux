@@ -1,0 +1,33 @@
+.Task {
+  width: 700px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  padding: 10px;
+}
+
+.title_date {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.messages {
+  margin: 0 10px;
+}
+
+.deadline {
+  margin: 0 10px;
+}
+
+.edit {
+  margin: 0 10px;
+}
+
+.delete {
+  margin: 0 10px;
+}
+
+.message_count {
+  margin: 0 10px;
+}

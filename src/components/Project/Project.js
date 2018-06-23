@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../../store/actions/index';
+import './Project.css';
+import Tasks from '../../containers/Tasks/Tasks';
 
 class Project extends Component {
   constructor(props) {
     super(props);
     this.state = {
       edit: false,
-      val: this.props.val
+      value: props.value,
+      showTasks: false,
+      taskTitle: ''
     }
   }
 
@@ -17,12 +19,12 @@ class Project extends Component {
 
   changeHandler = (e) => {
     e.preventDefault();
-    this.setState({ val: e.target.value });
+    this.setState({ value: e.target.value });
   }
 
   saveHandler = (e) => {
     e.preventDefault();
-    this.props.edited(this.state.val);
+    this.props.edited(this.state.value);
     this.setState({ edit: false });
   }
 
@@ -32,52 +34,47 @@ class Project extends Component {
   }
 
   showTasksHandler = () => {
-    this.props.fetchTasks(this.props.projectID);
+    this.setState((prevState, props) => { return { showTasks: !prevState.showTasks } });
   }
 
   render() {
+    let showBtnClass="glyphicon glyphicon-triangle-right";
+    if (this.state.showTasks) {
+      showBtnClass="glyphicon glyphicon-triangle-bottom";
+    }
+
     let input = (
-      <div>
-        <div onClick={this.showTasksHandler}>show</div>
-        <strong>{this.state.val}</strong>
-        <div onClick={this.props.deleted}>delete</div>
-        <div onClick={this.editHandler}>edit</div>
+      <div className='Project'>
+        <span className={showBtnClass} aria-hidden="true" onClick={this.showTasksHandler} ></span>
+        <div className='title' onClick={this.showTasksHandler}>{this.props.value}</div>
+        <span className='glyphicon glyphicon-pencil edit' onClick={this.editHandler}></span>
+        <span className='glyphicon glyphicon-trash trash' onClick={this.props.deleted}></span>
       </div>);
 
-   if (this.state.edit) {
-    input = (
-      <form>
-        <input value={this.state.val} onChange={(e) => this.changeHandler(e)}/>
-        <button onClick={this.saveHandler}>Save</button>
-        <button onClick={this.cancelHandler}>Cancel</button>
-      </form>
-    );
-   }
+    let edit = null;
+    if (this.state.edit) {
+      edit = (
+        <form>
+          <input value={this.state.value} onChange={this.changeHandler}/>
+          <button onClick={this.saveHandler}>Save</button>
+          <button onClick={this.cancelHandler}>Cancel</button>
+        </form>
+      );
+    }
 
-   return(
-     <div>
-       {input}
-     </div>
-   );
+    let tasks = null;
+    if (this.state.showTasks) {
+      tasks = <Tasks projectID={this.props.projectID} />
+    }
+
+    return(
+      <div>
+        {input}
+        {edit}
+        {tasks}
+      </div>
+    );
   }
 };
 
-const mapStateToProps = state => {
-  return {
-    tasks: state.project.tasks,
-    loading: state.project.loading,
-    error: state.project.error,
-    success: state.project.success
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchTasks: (projectID) => dispatch(actions.fetchTasks(projectID)),
-    // addTaskItem: (title) => dispatch(actions.addTaskItem(title)),
-    // deleteTaskItem: (id, index) => dispatch(actions.deleteTaskItem(id, index)),
-    // editTaskItem: (id, title, index) => dispatch(actions.editTaskItem(id, title, index))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Project);
+export default Project;
