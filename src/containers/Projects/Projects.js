@@ -49,11 +49,11 @@ class Projects extends Component {
           <div><NavLink to='/logout' className='glyphicon glyphicon-log-out'></NavLink></div>
         </div>
         <div className='projects'>
+          <p className='title_projects'>Projects</p>
           {projects}
           {spiner}
-          <form onSubmit={this.submitHandler}>
+          <form onSubmit={this.submitHandler} className='new_project'>
             <input placeholder='Enter Project Name ...' value={this.state.projectTitle} onChange={this.inputChangedHandler} />
-            <Button>SUBMIT</Button>
           </form>
         </div>
       </div>

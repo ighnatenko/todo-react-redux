@@ -1,10 +1,15 @@
-.Project {
+.project_row {
   width: 700px;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
   padding: 10px;
+  border-radius: 3px;
+}
+
+.project_row.open {
+ background-color: lightgray;
 }
 
 .title {
@@ -12,10 +17,39 @@
   margin: 0 10px;
 }
 
-.edit {
+.project_row .edit {
+  display: none;
   margin: 0 10px;
 }
 
-.trash {
+.project_row .trash {
+  display: none;
   margin: 0 10px;
+}
+
+.project_edit_form {
+  margin-top: 10px;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project_row_edit {
+  border-radius: 3px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid lightblue;
+}
+
+.project_edit_form button {
+  margin: 5px 10px 0 0;
+  width: 135px;
+}
+
+.project_row:hover .edit {
+  display: block;
+}
+
+.project_row:hover .trash {
+  display: block;
 }

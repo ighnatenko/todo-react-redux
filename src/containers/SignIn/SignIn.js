@@ -9,12 +9,6 @@ class SignIn extends Component {
     password: 'qqqqqqqq'
   }
 
-  componentDidMount() {
-    if (this.props.isAuthenticated) {
-      this.props.onSetAuthRedirectPath();
-    }
-  }
-
   submitHandler = (event) => {
     event.preventDefault();
     this.props.signIn(this.state.email, this.state.password);
@@ -34,11 +28,6 @@ class SignIn extends Component {
   }
 
   render() {
-    let authRedirect = null;
-    if (this.props.isAuthenticated) {
-      authRedirect = <Redirect to={this.props.authRedirectPath}/>
-    }
-
     let errorMessage = null;
     if (this.props.error !== null) {
       errorMessage = <p>{this.props.error}</p>;
@@ -52,7 +41,6 @@ class SignIn extends Component {
     return(
       <div>
         {spinner}
-        {authRedirect}
         {/* {errorMessage} */}
         <form onSubmit={this.submitHandler}>
           <input value={this.state.email} onChange={(event) => this.inputChangedHandler(event, 'email')} />
@@ -68,15 +56,13 @@ const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
     error: state.auth.error,
-    isAuthenticated: state.auth.token !== null,
-    authRedirectPath: state.auth.authRedirectPath
+    isAuthenticated: state.auth.token !== null
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    signIn: (email, password) => dispatch(actions.signIn(email, password)),
-    onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+    signIn: (email, password) => dispatch(actions.signIn(email, password))
   };
 };
 

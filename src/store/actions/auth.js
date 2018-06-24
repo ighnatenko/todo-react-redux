@@ -96,13 +96,6 @@ export const signUp = (email, password) => {
   };
 };
 
-export const setAuthRedirectPath = (path) => {
-  return {
-      type: actionTypes.AUTH_REDIRECT_PATH,
-      path: path
-  };
-};
-
 export const setHeaders = (response) => {
   localStorage.setItem('access-token', response.headers['access-token']);
   localStorage.setItem('client', response.headers['client']);

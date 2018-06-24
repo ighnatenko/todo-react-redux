@@ -43,34 +43,39 @@ class Project extends Component {
       showBtnClass="glyphicon glyphicon-triangle-bottom";
     }
 
-    let input = (
-      <div className='Project'>
+    let rowClass = 'project_row';
+    if (this.state.showTasks) {
+      rowClass = 'project_row open';
+    }
+
+    let row = (
+      <div className={rowClass}>
         <span className={showBtnClass} aria-hidden="true" onClick={this.showTasksHandler} ></span>
         <div className='title' onClick={this.showTasksHandler}>{this.props.value}</div>
         <span className='glyphicon glyphicon-pencil edit' onClick={this.editHandler}></span>
         <span className='glyphicon glyphicon-trash trash' onClick={this.props.deleted}></span>
       </div>);
 
-    let edit = null;
     if (this.state.edit) {
-      edit = (
-        <form>
-          <input value={this.state.value} onChange={this.changeHandler}/>
-          <button onClick={this.saveHandler}>Save</button>
-          <button onClick={this.cancelHandler}>Cancel</button>
+      row = (
+        <form className='project_edit_form'>
+          <input value={this.state.value} onChange={this.changeHandler} className='project_row_edit'/>
+          <div>
+            <button type="button" className="btn btn-info" onClick={this.saveHandler}>Save</button>
+            <button type="button" className="btn btn-default" onClick={this.cancelHandler}>Cancel</button>
+          </div>
         </form>
       );
     }
 
     let tasks = null;
-    if (this.state.showTasks) {
+    if (this.state.showTasks && !this.state.edit) {
       tasks = <Tasks projectID={this.props.projectID} />
     }
 
     return(
       <div>
-        {input}
-        {edit}
+        {row}
         {tasks}
       </div>
     );
