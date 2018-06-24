@@ -53,7 +53,7 @@ const deleteCommentFail = (state, action) => {
 
 const addCommentSuccess = (state, action) => {
   const comments = [...state.comments];
-  comments.push(action.item);
+  comments.unshift(action.item);
   return updateObject(state, {
     loading: false,
     comments: comments

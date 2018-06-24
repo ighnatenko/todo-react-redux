@@ -72,3 +72,28 @@
 .task:hover {
   background-color: lightblue;
 }
+
+.add_comment_title {
+  font-size: 20px;
+  margin: 10px;
+}
+
+.comments_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comments_modal {
+  position: fixed;
+  background-color: white;
+  width: 70%;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px black;
+  padding: 16px;
+  left: 15%;
+  top: 5%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  overflow-y: auto;
+  height: 90%;
+}

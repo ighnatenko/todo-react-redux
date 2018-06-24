@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Deadline from '../Deadline/Deadline';
 import Comments from '../../containers/Comments/Comments';
 import { Popover, } from 'reactstrap';
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import './Task.css';
 import moment from 'moment';
+import ReactModal from 'react-modal';
 
 class Task extends Component {
   constructor(props) {
@@ -16,6 +16,10 @@ class Task extends Component {
       isDone: props.isDone,
       isOpenDeadline: false
     }
+  }
+
+  componentWillMount() {
+    ReactModal.setAppElement('body');
   }
 
   editHandler = () => {
@@ -55,6 +59,14 @@ class Task extends Component {
 
   toggleCommentsHandler = () => {
     this.setState((prevState, props) => { return { isShowComments: !prevState.isShowComments } });
+  }
+
+  handleOpenModal = () => {
+    this.setState({ isShowComments: true });
+  }
+  
+  handleCloseModal = () => {
+    this.setState({ isShowComments: false });
   }
 
   render() {
@@ -98,7 +110,7 @@ class Task extends Component {
           </div>
           
           <div className='message_count'>{this.props.msgCount}</div>
-          <div className='glyphicon glyphicon-cloud-download messages' onClick={this.toggleCommentsHandler} id={'comments-' + this.props.taskID}></div>
+          <div className='glyphicon glyphicon-cloud-download messages' onClick={this.toggleCommentsHandler} id='task_comment'></div>
           <div className='glyphicon glyphicon-time deadline' onClick={this.toggleDeadlineHandler} id={'deadline-' + this.props.taskID}></div>
           <div className='glyphicon glyphicon-pencil edit' onClick={this.editHandler}></div>
           <div className='glyphicon glyphicon-trash trash' onClick={this.props.deleted}></div>
@@ -111,13 +123,17 @@ class Task extends Component {
           closed={this.toggleDeadlineHandler} 
           dateChanged={(date) => this.submitDateHandler(date)} />
         </Popover>
-
-        <Modal isOpen={this.state.isShowComments} fade={false} toggle={this.toggleCommentsHandler} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }}>
-          <ModalHeader toggle={this.toggleCommentsHandler}>Modal title</ModalHeader>
-          <ModalBody>
-            {commentsList}
-          </ModalBody>
-        </Modal>
+  
+        <ReactModal
+          className='comments_modal'
+          isOpen={this.state.isShowComments}
+          contentLabel="Minimal Modal Example">
+          <div className='comments_header'>
+            <p className='add_comment_title'>Add Comment</p>
+            <div className='glyphicon glyphicon-remove comment_close' onClick={this.handleCloseModal}></div>
+          </div>
+          {commentsList}
+        </ReactModal>
       </div>
     );
   }

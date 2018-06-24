@@ -1,0 +1,23 @@
+.comment_row {
+  width: 100%;
+}
+
+.comment_header {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+.comment_date {
+  margin-left: 10px;
+}
+.comment_delete {
+  margin-left: 20px;
+}
+.comment_title {
+  margin: 10px;
+}
+
+.comment_img {
+  width: 100%;
+}

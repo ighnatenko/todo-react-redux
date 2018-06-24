@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Comment from '../../components/Comment/Comment';
+import './Comments.css';
 
 const maxFileSize = 1048576;
 
@@ -21,10 +22,7 @@ class Comments extends Component {
   selectFileHandler = (event) => {
     this.setState({
       selectedFile: event.target.files[0]
-      
     });
-    // console.log(event.target.files[0]);
-    // console.log('SIZE = ' + event.target.files[0].size);
   }
 
   uploadHandler = () => {
@@ -37,6 +35,8 @@ class Comments extends Component {
     fd.append('content', this.state.content)
     fd.append('file', this.state.selectedFile)
     this.props.addComment(this.props.projectID, this.props.taskID, fd);
+
+    this.setState({content: '', selectedFile: null})
   }
 
   deleteHandler = (id, index) => {
@@ -65,10 +65,17 @@ class Comments extends Component {
     ));
 
     return(
-      <div className=''>
-        <textarea value={this.state.content} onChange={this.contentHandler} />
-        <input type='file' onChange={this.selectFileHandler} />
-        <button onClick={this.uploadHandler}>Save</button>
+      <div>
+        <textarea value={this.state.content} 
+          onChange={this.contentHandler} 
+          className='comments_input' 
+          placeholder='Enter Your Comment' />
+        <input style={{display: 'none'}} type='file' accept=".jpg, .png"
+          onChange={this.selectFileHandler} ref={fileInput => this.fileInput = fileInput} />
+        <button onClick={() => this.fileInput.click()}>Pick File</button>
+        <button type="button" className="btn btn-success comment_save" 
+          onClick={this.uploadHandler}>Save</button>
+        <div className='clear_fix'></div>
         {spiner}
         {comments}
       </div>
