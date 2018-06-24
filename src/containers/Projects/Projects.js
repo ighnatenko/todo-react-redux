@@ -4,6 +4,7 @@ import * as actions from '../../store/actions/index';
 import Project from '../../components/Project/Project';
 import './Projects.css';
 import { Button } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
 class Projects extends Component {
   state = {
@@ -42,13 +43,19 @@ class Projects extends Component {
       ))
     
     return (
-      <div className='projects'>
-        {projects}
-        {spiner}
-        <form onSubmit={this.submitHandler}>
-          <input placeholder='Enter Project Name ...' value={this.state.projectTitle} onChange={this.inputChangedHandler} />
-          <Button>SUBMIT</Button>
-        </form>
+      <div>
+        <div className='header'>
+          <p>Simple ToDo List</p>
+          <div><NavLink to='/logout' className='glyphicon glyphicon-log-out'></NavLink></div>
+        </div>
+        <div className='projects'>
+          {projects}
+          {spiner}
+          <form onSubmit={this.submitHandler}>
+            <input placeholder='Enter Project Name ...' value={this.state.projectTitle} onChange={this.inputChangedHandler} />
+            <Button>SUBMIT</Button>
+          </form>
+        </div>
       </div>
     );
   }

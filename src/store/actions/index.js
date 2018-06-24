@@ -2,7 +2,8 @@ export {
   signUp,
   signIn,
   setAuthRedirectPath, 
-  authCheckState
+  authCheckState,
+  logout
 } from './auth';
 
 export {

@@ -4,3 +4,26 @@
   align-items: center;
   margin: auto;
 }
+
+.header {
+  position: relative;
+  height: 70px;
+  background-color: lightgray;
+  margin: 0;
+  display: flex;
+  flex-flow: row;
+}
+
+.header p {
+  font-size: 32px;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  margin: auto;
+  padding: 10px;
+}
+
+.header div {
+  position: absolute;
+  top: 40%;
+  right: 20px;
+}

@@ -3,10 +3,22 @@ import * as actionTypes from './actionTypes';
 import * as constants from '../../constants';
 import * as auth from './authSettings';
 
+export const logout = () => {
+  localStorage.setItem('access-token', '');
+  localStorage.setItem('client', '');
+  localStorage.setItem('expiry', '');
+  localStorage.setItem('uid', '');
+  localStorage.setItem('token-type', '');
+
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  };
+};
+
 export const authCheckState = () => {
   return dispatch => {
     dispatch(loadAuthStart());
-
+    
     axios.get(constants.VALIDATE_TOKEN_URL, {headers: headers()})
       .then(response => {
         console.log('============== SUCCESS ================');
@@ -18,7 +30,7 @@ export const authCheckState = () => {
       .catch(err => {
         console.log('============== ERROR ================');
         console.log('auth FAIL = ' + err);
-        // dispatch(authFail(err.toString()));
+        dispatch(authFail(err.toString()));
       });
   };
 };

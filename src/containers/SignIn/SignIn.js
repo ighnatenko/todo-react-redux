@@ -53,7 +53,7 @@ class SignIn extends Component {
       <div>
         {spinner}
         {authRedirect}
-        {errorMessage}
+        {/* {errorMessage} */}
         <form onSubmit={this.submitHandler}>
           <input value={this.state.email} onChange={(event) => this.inputChangedHandler(event, 'email')} />
           <input value={this.state.password} onChange={(event) => this.inputChangedHandler(event, 'password')} />
