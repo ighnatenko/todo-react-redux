@@ -17,12 +17,7 @@
   margin: 0 10px;
 }
 
-.project_row .edit {
-  display: none;
-  margin: 0 10px;
-}
-
-.project_row .trash {
+.project_row .trash, .project_row .edit  {
   display: none;
   margin: 0 10px;
 }
@@ -46,10 +41,6 @@
   width: 135px;
 }
 
-.project_row:hover .edit {
-  display: block;
-}
-
-.project_row:hover .trash {
+.project_row:hover .trash, .project_row:hover .edit  {
   display: block;
 }

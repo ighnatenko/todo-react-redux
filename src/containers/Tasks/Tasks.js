@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Task from '../../components/Task/Task';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
+import './Tasks.css';
 
 class Tasks extends Component {
   state = {
@@ -87,7 +88,7 @@ class Tasks extends Component {
           index={task.index}
           date={task.expiration_date}
           isDone={task.done}
-          msgCount={task.comments != null ? task.comments.length : 0}
+          msgCount={task.comments != null ? (task.comments.length == 0 ? '' : task.comments.length) : ''}
           deleted={() => this.props.deleteTaskItem(task.id, this.props.projectID)}
           edited={(data) => this.props.editTaskItem(task.id, this.props.projectID, data)}
           downPositionHandler={() => this.downPositionHandler(index)}
@@ -101,7 +102,7 @@ class Tasks extends Component {
         {tasks}
         {loading}
         <form onSubmit={this.submitTaskHandler}>
-          <input placeholder='Enter Task Name ...' value={this.state.taskTitle} onChange={this.inputTaskHandler} />
+          <input placeholder='Enter Task Name ...' value={this.state.taskTitle} onChange={this.inputTaskHandler} className='add_task'/>
         </form>
       </div>
     );
