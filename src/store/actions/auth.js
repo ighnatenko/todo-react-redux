@@ -30,7 +30,7 @@ export const authCheckState = () => {
       .catch(err => {
         console.log('============== ERROR ================');
         console.log('auth FAIL = ' + err);
-        dispatch(authFail(err.toString()));
+        // dispatch(authFail(err.toString()));
       });
   };
 };
@@ -70,7 +70,7 @@ export const signIn = (email, password) => {
         dispatch(authSuccess(response.headers['access-token']));
       })
       .catch(err => {
-        dispatch(authFail(err.toString()));
+        dispatch(authFail('Incorrect login or(and) password'));
       });
   };
 };

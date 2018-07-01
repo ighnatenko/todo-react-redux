@@ -1,0 +1,24 @@
+.sign_in {
+  margin: 50px auto;
+  width: 300px;
+}
+
+.sign_in_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.sign_in_btn {
+  width: 150px;
+}
+
+.sign_in_title {
+  font-size: 35px;
+  padding-bottom: 20px;
+}
+
+.sign_in_warning {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 10px;
+}

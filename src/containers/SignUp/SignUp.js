@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
+import './SignUp.css';
 
 class SignUp extends Component {
   state = {
@@ -43,19 +44,31 @@ class SignUp extends Component {
     }
 
     return (
-      <div>
+      <div className='sign_up'>
         {spinner}
-        {/* {errorMessage} */}
-        <form onSubmit={this.submitHandler}>
-          <input value={this.state.email} onChange={(event) => this.inputChangedHandler(event, 'email')} />
-          <input value={this.state.password} onChange={(event) => this.inputChangedHandler(event, 'password')} />
-          <input value={this.state.confirm_password} onChange={(event) => this.inputChangedHandler(event, 'confirm_password')} />
-          <button btnType="Success">SUBMIT</button>
+        <div className='sign_up_title'>Sign Up</div>
+        <form onSubmit={this.submitHandler} className='sign_up_form'>
+          {errorMessage}
+
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Enter email"
+            value={this.state.email} onChange={(event) => this.inputChangedHandler(event, 'email')} />
+          </div>
+
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" 
+            value={this.state.password} onChange={(event) => this.inputChangedHandler(event, 'password')} />
+          </div>
+
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" 
+            value={this.state.confirm_password} onChange={(event) => this.inputChangedHandler(event, 'confirm_password')} />
+          </div>
+          
+          <button type="button" className="btn btn-info sign_up_btn" onClick={this.submitHandler}>Sign Up</button>
         </form>
 
-        <Link to='/sign_in'>SignIn</Link>
-        <br />
-        <Link to='/todos'>Todos</Link>
+        <div className='already_member'>Already a member ? <Link to='/sign_in'>SignIn</Link></div>
       </div>
     );
   }

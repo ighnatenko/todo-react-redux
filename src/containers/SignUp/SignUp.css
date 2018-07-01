@@ -1,0 +1,29 @@
+.sign_up {
+  margin: 50px auto;
+  width: 300px;
+}
+
+.sign_up_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.sign_up_btn {
+  width: 150px;
+}
+
+.sign_up_title {
+  font-size: 35px;
+  padding-bottom: 20px;
+}
+
+.sign_up_warning {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.already_member {
+  font-size: 15px;
+  margin-top: 15px;
+}

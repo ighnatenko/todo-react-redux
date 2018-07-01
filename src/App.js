@@ -6,6 +6,7 @@ import SignIn from './containers/SignIn/SignIn';
 import Logout from './containers/Logout/Logout';
 import Projects from './containers/Projects/Projects';
 import * as actions from './store/actions/index';
+import { NavLink } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
       </Switch>
     );
 
+    let logoutLink = null;
     if (this.props.isAuthenticated) {
       routes = (
         <Switch>
@@ -35,12 +37,19 @@ class App extends Component {
           <Redirect to='/' />
         </Switch>
       );
+      logoutLink = <div><NavLink to='/logout' className='glyphicon glyphicon-log-out'></NavLink></div>
     }
+
+    
+
 
     return (
       <div>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
-       
+        <div className='header'>
+          <p>Simple ToDo List</p>
+          {logoutLink}
+        </div>
         {spiner}
         {routes}
       </div>

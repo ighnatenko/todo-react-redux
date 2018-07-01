@@ -88,7 +88,7 @@ class Tasks extends Component {
           index={task.index}
           date={task.expiration_date}
           isDone={task.done}
-          msgCount={task.comments != null ? (task.comments.length == 0 ? '' : task.comments.length) : ''}
+          msgCount={task.comments !== null ? (task.comments.length == 0 ? '' : task.comments.length) : ''}
           deleted={() => this.props.deleteTaskItem(task.id, this.props.projectID)}
           edited={(data) => this.props.editTaskItem(task.id, this.props.projectID, data)}
           downPositionHandler={() => this.downPositionHandler(index)}

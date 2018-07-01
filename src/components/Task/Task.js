@@ -3,7 +3,6 @@ import Deadline from '../Deadline/Deadline';
 import Comments from '../../containers/Comments/Comments';
 import { Popover, } from 'reactstrap';
 import './Task.css';
-import moment from 'moment';
 import ReactModal from 'react-modal';
 
 class Task extends Component {
@@ -83,11 +82,6 @@ class Task extends Component {
       );
     }
 
-    let date = null;
-    if (this.props.date) {
-      date = moment(this.props.date.toString()).format('DD/MM/YYYY');
-    }
-
     let commentsList = null;
     if (this.state.isShowComments) {
       commentsList = <Comments taskID={this.props.taskID} projectID={this.props.projectID} />
@@ -106,7 +100,7 @@ class Task extends Component {
           <input className="task_checkBox" type="checkbox" checked={this.state.isDone} onChange={this.changeDoneHandler}/>
           <div className='title_date'>
             <div className={titleClass}>{this.props.title}</div>
-            <div className='task_date'>{date}</div>
+            <div className='task_date'>{this.props.date}</div>
           </div>
           
           <div className='message_count'>{this.props.msgCount}</div>
