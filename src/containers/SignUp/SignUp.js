@@ -5,10 +5,13 @@ import * as actions from '../../store/actions/index';
 import './SignUp.css';
 
 class SignUp extends Component {
-  state = {
-    email: '',
-    password: '',
-    confirm_password: ''
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      confirm_password: ''
+    }
   }
 
   submitHandler = (event) => {
@@ -35,7 +38,7 @@ class SignUp extends Component {
   render() {
     let errorMessage = null;
     if (this.props.error !== null) {
-      errorMessage = <p>{this.props.error}</p>;
+      errorMessage = <p className='sign_up_warning'>{this.props.error}</p>;
     }
 
     let spinner = null; 
@@ -50,25 +53,25 @@ class SignUp extends Component {
         <form onSubmit={this.submitHandler} className='sign_up_form'>
           {errorMessage}
 
-          <div class="form-group">
-            <input type="email" class="form-control" placeholder="Enter email"
+          <div className="form-group">
+            <input type="email" className="form-control" placeholder="Enter email"
             value={this.state.email} onChange={(event) => this.inputChangedHandler(event, 'email')} />
           </div>
 
-          <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" 
+          <div className="form-group">
+            <input type="password" className="form-control" placeholder="Password" 
             value={this.state.password} onChange={(event) => this.inputChangedHandler(event, 'password')} />
           </div>
 
-          <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" 
+          <div className="form-group">
+            <input type="password" className="form-control" placeholder="Password" 
             value={this.state.confirm_password} onChange={(event) => this.inputChangedHandler(event, 'confirm_password')} />
           </div>
           
           <button type="button" className="btn btn-info sign_up_btn" onClick={this.submitHandler}>Sign Up</button>
         </form>
 
-        <div className='already_member'>Already a member ? <Link to='/sign_in'>SignIn</Link></div>
+        <div className='already_member'>Already a member ? <Link to='/sign_in'>Sign In</Link></div>
       </div>
     );
   }

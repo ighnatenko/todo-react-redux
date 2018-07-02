@@ -18,7 +18,8 @@ const fetchTasksSuccess = (state, action) => {
   state.tasks[action.projectID] = action.tasks;
   return updateObject(state, {
     tasks: state.tasks,
-    loading: false
+    loading: false,
+    error: null
   });
 };
 
@@ -33,7 +34,8 @@ const addTaskItemSuccess = (state, action) => {
   state.tasks[action.projectID].push(action.task);
   return updateObject(state, {
     tasks: state.tasks,
-    loading: false
+    loading: false,
+    error: null
   });
 };
 
@@ -53,7 +55,8 @@ const removeTaskItemSuccess = (state, action) => {
 
   return updateObject(state, {
     tasks: tasks,
-    loading: false
+    loading: false,
+    error: null
   });
 };
 
@@ -73,7 +76,8 @@ const editTaskItemSuccess = (state, action) => {
 
   return updateObject(state, {
     tasks: tasks,
-    loading: false
+    loading: false,
+    error: null
   });
 };
 

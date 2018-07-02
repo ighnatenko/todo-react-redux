@@ -22,8 +22,8 @@ class App extends Component {
 
     let routes = (
       <Switch>
-        <Route path='/sign_up' component={SignUp} />
-        <Route path='/sign_in' component={SignIn} />
+        <Route path='/sign_up' exact component={SignUp} />
+        <Route path='/sign_in' exact component={SignIn} />
         <Redirect to='/sign_in' />
       </Switch>
     );
@@ -33,19 +33,15 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/logout" component={Logout} />
-          <Route path='/' component={Projects} />
+          <Route path='/' exact component={Projects} />
           <Redirect to='/' />
         </Switch>
       );
       logoutLink = <div><NavLink to='/logout' className='glyphicon glyphicon-log-out'></NavLink></div>
     }
 
-    
-
-
     return (
       <div>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
         <div className='header'>
           <p>Simple ToDo List</p>
           {logoutLink}
@@ -59,7 +55,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.auth.success,
+    isAuthenticated: state.auth.token !== null,
     authRedirectPath: state.auth.authRedirectPath
   };
 };

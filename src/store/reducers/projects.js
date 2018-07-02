@@ -16,7 +16,8 @@ const addProjectSuccess = (state, action) => {
   projects.push(action.project)
   return updateObject(state, {
     projects: projects,
-    loading: false
+    loading: false,
+    error: null
   });
 };
 
@@ -30,7 +31,8 @@ const addProjectFail = (state, action) => {
 const fetchProjectsSuccess = (state, action) => {
   return updateObject(state, {
     projects: state.projects.concat(action.projects),
-    loading: false
+    loading: false,
+    error: null
   });
 };
 
@@ -45,13 +47,16 @@ const deleteProjectSuccess = (state, action) => {
   let items = [...state.projects];
   items = items.filter(item => item.id !== action.id);
   return updateObject(state, {
-    projects: items
+    projects: items,
+    loading: false,
+    error: null
   });
 };
 
 const deleteProjectFail = (state, action) => {
   return updateObject(state, {
-    error: action.error
+    error: action.error,
+    loading: false
   });
 };
 
@@ -60,7 +65,9 @@ const editProjectSuccess = (state, action) => {
   const index = newProjects.findIndex(item => item.id === action.id);
   newProjects[index].title = action.title;
   return updateObject(state, {
-    projects: newProjects
+    projects: newProjects,
+    loading: false,
+    error: null
   });
 };
 

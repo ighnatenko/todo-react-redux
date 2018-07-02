@@ -42,7 +42,7 @@ export const fetchProjects = () => {
     auth.instanceAxios().get('/projects')
       .then(response => {
         console.log(response);
-        // auth.setHeadersStore(response);
+        auth.setHeadersStore(response);
         dispatch(fetchProjectsSuccess(response.data));
       })
       .catch(err => {
@@ -81,6 +81,7 @@ export const deleteProjectFail = (error) => {
 
 export const deleteProjectItem = (id) => {
   return dispatch => {
+    dispatch(loadingStart());
     auth.instanceAxios().delete('projects/' + id)
       .then(response => {
         console.log(response);
@@ -103,6 +104,7 @@ export const editProjectSuccess = (title, id) => {
 
 export const editProjectItem = (id, title) => {
   return dispatch => {
+    dispatch(loadingStart());
     auth.instanceAxios().put('projects/' + id, { title: title })
     .then(response => {
       console.log(response);

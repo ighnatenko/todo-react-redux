@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
+import { Link } from 'react-router-dom';
 import './SignIn.css';
 
 class SignIn extends Component {
@@ -44,18 +45,20 @@ class SignIn extends Component {
         <form onSubmit={this.submitHandler} className='sign_in_form'>
           {errorMessage}
 
-          <div class="form-group">
-            <input type="email" class="form-control" placeholder="Enter email"
+          <div className="form-group">
+            <input type="email" className="form-control" placeholder="Enter email"
             value={this.state.email} onChange={(event) => this.inputChangedHandler(event, 'email')} />
           </div>
 
-          <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" 
+          <div className="form-group">
+            <input type="password" className="form-control" placeholder="Password" 
             value={this.state.password} onChange={(event) => this.inputChangedHandler(event, 'password')} />
           </div>
           
           <button type="button" className="btn btn-info sign_in_btn" onClick={this.submitHandler}>Sign In</button>
         </form>
+
+         <Link className='sign_up_link' to='/sign_up'>Sign Up</Link>
       </div>
     );
   }

@@ -27,3 +27,9 @@
   font-size: 15px;
   margin-top: 15px;
 }
+
+.sign_up_warning {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 10px;
+}

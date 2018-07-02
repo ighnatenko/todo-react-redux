@@ -24,13 +24,12 @@ export const authCheckState = () => {
         console.log('============== SUCCESS ================');
         console.log(response);
         auth.setHeadersStore(response);
-        
         dispatch(authSuccess(response.headers['access-token']));
       })
       .catch(err => {
         console.log('============== ERROR ================');
         console.log('auth FAIL = ' + err);
-        // dispatch(authFail(err.toString()));
+        dispatch(authFail(err.toString()));
       });
   };
 };

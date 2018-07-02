@@ -4,13 +4,14 @@ import { updateObject } from '../utility';
 const initialState = {
   comments: [],
   error: null,
-  loading: false,
-  success: null
+  loading: false
 };
 
 const clearComments = (state, action) => {
   return updateObject(state, {
-    comments: []
+    comments: [],
+    error: null,
+    loading: false
   });
 };
 
@@ -56,7 +57,8 @@ const addCommentSuccess = (state, action) => {
   comments.unshift(action.item);
   return updateObject(state, {
     loading: false,
-    comments: comments
+    comments: comments,
+    error: null
   });
 };
 

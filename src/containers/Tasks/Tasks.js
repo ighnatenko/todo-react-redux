@@ -62,6 +62,7 @@ class Tasks extends Component {
     e.preventDefault();
     if (!this.props.loading) {
       let position = 1;
+      
       if (this.props.tasks[this.props.projectID].length > 0) {
         let tasks = this.props.tasks[this.props.projectID];
         position = tasks[tasks.length-1].index + 1;
@@ -69,6 +70,16 @@ class Tasks extends Component {
       this.props.addTaskItem(this.state.taskTitle, position, this.props.projectID);
       this.setState({taskTitle: ''});
     }
+  }
+
+  commentsCountHandler = (task) => {
+    let commentsCount = '';
+    if (task.comments !== undefined) {
+      if (task.comments.length !== 0) {
+        commentsCount = task.comments.length;
+      }
+    }
+    return commentsCount;
   }
 
   render() {
@@ -88,7 +99,7 @@ class Tasks extends Component {
           index={task.index}
           date={task.expiration_date}
           isDone={task.done}
-          msgCount={task.comments !== null ? (task.comments.length == 0 ? '' : task.comments.length) : ''}
+          msgCount={this.commentsCountHandler(task)}
           deleted={() => this.props.deleteTaskItem(task.id, this.props.projectID)}
           edited={(data) => this.props.editTaskItem(task.id, this.props.projectID, data)}
           downPositionHandler={() => this.downPositionHandler(index)}
