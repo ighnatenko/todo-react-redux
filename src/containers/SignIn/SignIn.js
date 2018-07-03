@@ -6,8 +6,12 @@ import './SignIn.css';
 
 class SignIn extends Component {
   state = {
-    email: 'qq@q.ua',
-    password: 'qqqqqqqq'
+    email: '',
+    password: ''
+  }
+
+  componentDidMount () {
+    this.props.clearState();
   }
 
   submitHandler = (event) => {
@@ -74,7 +78,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signIn: (email, password) => dispatch(actions.signIn(email, password))
+    signIn: (email, password) => dispatch(actions.signIn(email, password)),
+    clearState: () => dispatch(actions.clearState())
   };
 };
 

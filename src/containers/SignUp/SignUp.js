@@ -14,6 +14,10 @@ class SignUp extends Component {
     }
   }
 
+  componentDidMount () {
+    this.props.clearState();
+  }
+
   submitHandler = (event) => {
     event.preventDefault();
     this.props.signUp(this.state.email, this.state.password);
@@ -30,8 +34,7 @@ class SignUp extends Component {
       case 'confirm_password':
         this.setState({ confirm_password: event.target.value });
         break;  
-      default:
-        break;
+      default: break;
     }
   }
 
@@ -64,7 +67,7 @@ class SignUp extends Component {
           </div>
 
           <div className="form-group">
-            <input type="password" className="form-control" placeholder="Password" 
+            <input type="password" className="form-control" placeholder="Confirm Password" 
             value={this.state.confirm_password} onChange={(event) => this.inputChangedHandler(event, 'confirm_password')} />
           </div>
           
@@ -87,7 +90,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signUp: (email, password) => dispatch(actions.signUp(email, password))
+    signUp: (email, password) => dispatch(actions.signUp(email, password)),
+    clearState: () => dispatch(actions.clearState())
   };
 };
 

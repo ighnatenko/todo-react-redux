@@ -17,12 +17,23 @@ class Projects extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
+    if (this.props.loading) return;
     this.props.addProjectItem(this.state.projectTitle);
     this.setState({projectTitle: ''});
   }
 
   inputChangedHandler = (event) => {
     this.setState({projectTitle: event.target.value});
+  }
+
+  deleteProjectHandler = (id) => {
+    if (this.props.loading) return;
+    this.props.deleteProjectItem(id)
+  }
+
+  editProjectHandler = (id, title) => {
+    if (this.props.loading) return;
+    this.props.editProjectItem(id, title)
   }
 
   render() {
@@ -36,8 +47,8 @@ class Projects extends Component {
         key={project.id}
         value={project.title}
         projectID={project.id}
-        deleted={() => this.props.deleteProjectItem(project.id)}
-        edited={(title) => this.props.editProjectItem(project.id, title)} />
+        deleted={() => this.deleteProjectHandler(project.id)}
+        edited={(title) => this.editProjectHandler(project.id, title)} />
       ))
     
     return (

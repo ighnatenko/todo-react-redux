@@ -15,10 +15,17 @@ export const logout = () => {
   };
 };
 
+export const clearState = () => {
+  return dispatch => {
+    dispatch({
+      type: actionTypes.AUTH_CLEAR_STATE
+    });
+  }
+}
+
 export const authCheckState = () => {
   return dispatch => {
-    dispatch(loadAuthStart());
-    
+    // dispatch(loadAuthStart());
     axios.get(constants.VALIDATE_TOKEN_URL, {headers: headers()})
       .then(response => {
         console.log('============== SUCCESS ================');
@@ -29,7 +36,7 @@ export const authCheckState = () => {
       .catch(err => {
         console.log('============== ERROR ================');
         console.log('auth FAIL = ' + err);
-        dispatch(authFail(err.toString()));
+        // dispatch(authFail(err.toString()));
       });
   };
 };

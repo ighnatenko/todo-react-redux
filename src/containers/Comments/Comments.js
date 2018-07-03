@@ -26,6 +26,7 @@ class Comments extends Component {
   }
 
   uploadHandler = () => {
+    if (this.state.content === '') return;
     if (this.state.selectedFile != null && this.state.selectedFile.size > maxFileSize) {
       this.setState({selectedFile: null});
       return

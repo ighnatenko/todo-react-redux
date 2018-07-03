@@ -6,7 +6,7 @@ export const fetchTasks = (projectID) => {
     dispatch(fetchTasksStart());
     auth.instanceAxios().get('/projects/' + projectID + '/tasks')
       .then(response => {
-        console.log(response.data);
+        console.log(response);
         auth.setHeadersStore(response);
         dispatch(fetchTasksSuccess(response.data, projectID));
       })
@@ -43,7 +43,7 @@ export const addTaskItem = (title, position, projectID) => {
     dispatch(fetchTasksStart());
     auth.instanceAxios().post('/projects/' + projectID + '/tasks', {title: title, index: position})
       .then(response => {
-        console.log(response.data);
+        console.log(response);
         auth.setHeadersStore(response);
         dispatch(addTaskItemSuccess(response.data, projectID));
       })
