@@ -7,12 +7,10 @@ export const fetchComments = (projectID, taskID) => {
     dispatch(fetchCommentsStart());
     auth.instanceAxios().get('/projects/' + projectID + '/tasks/' + taskID + '/comments')
       .then(response => {
-        console.log(response.data);
         auth.setHeadersStore(response);
         dispatch(fetchCommentsSuccess(response.data));
       })
       .catch(err => {
-        console.log(err);
         dispatch(fetchCommentsFail(err));
       });
   };
@@ -49,12 +47,10 @@ export const deleteCommentItem = (projectID, taskID, commentID, items) => {
     dispatch(fetchCommentsStart());
     auth.instanceAxios().delete('/projects/' + projectID + '/tasks/' + taskID + '/comments/' + commentID)
       .then(response => {
-        console.log(response);
         auth.setHeadersStore(response);
         dispatch(deleteCommentSuccess(items));
       })
       .catch(err => {
-        console.log(err);
         dispatch(deleteCommentFail(err));
       });
     };
@@ -79,12 +75,10 @@ export const addComment = (projectID, taskID, data) => {
     dispatch(fetchCommentsStart());
     auth.instanceAxios().post('/projects/' + projectID + '/tasks/' + taskID + '/comments', data)
       .then(response => {
-        console.log(response.data);
         auth.setHeadersStore(response);
         dispatch(addCommentSuccess(response.data));
       })
       .catch(err => {
-        console.log(err);
         dispatch(addCommentFail(err));
       });
     };

@@ -28,14 +28,10 @@ export const authCheckState = () => {
     // dispatch(loadAuthStart());
     axios.get(constants.VALIDATE_TOKEN_URL, {headers: headers()})
       .then(response => {
-        console.log('============== SUCCESS ================');
-        console.log(response);
         auth.setHeadersStore(response);
         dispatch(authSuccess(response.headers['access-token']));
       })
       .catch(err => {
-        console.log('============== ERROR ================');
-        console.log('auth FAIL = ' + err);
         // dispatch(authFail(err.toString()));
       });
   };

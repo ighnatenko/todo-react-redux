@@ -26,7 +26,6 @@ export const addProjectItem = (title) => {
     dispatch(loadingStart());
     auth.instanceAxios().post('/projects', { title: title })
       .then(response => {
-        console.log(response);
         auth.setHeadersStore(response);
         dispatch(addProjectSuccess(response.data));
       })
@@ -41,7 +40,6 @@ export const fetchProjects = () => {
     dispatch(loadingStart());
     auth.instanceAxios().get('/projects')
       .then(response => {
-        console.log(response);
         auth.setHeadersStore(response);
         dispatch(fetchProjectsSuccess(response.data));
       })
@@ -84,7 +82,6 @@ export const deleteProjectItem = (id) => {
     dispatch(loadingStart());
     auth.instanceAxios().delete('projects/' + id)
       .then(response => {
-        console.log(response);
         auth.setHeadersStore(response);
         dispatch(deleteProjectSuccess(id));
       })
@@ -107,12 +104,10 @@ export const editProjectItem = (id, title) => {
     dispatch(loadingStart());
     auth.instanceAxios().put('projects/' + id, { title: title })
     .then(response => {
-      console.log(response);
       auth.setHeadersStore(response);
       dispatch(editProjectSuccess(title, id));
     })
     .catch(err => {
-      console.log(err);
     });
   };
 };

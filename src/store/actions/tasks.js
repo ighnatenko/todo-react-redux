@@ -6,12 +6,10 @@ export const fetchTasks = (projectID) => {
     dispatch(fetchTasksStart());
     auth.instanceAxios().get('/projects/' + projectID + '/tasks')
       .then(response => {
-        console.log(response);
         auth.setHeadersStore(response);
         dispatch(fetchTasksSuccess(response.data, projectID));
       })
       .catch(err => {
-        console.log(err);
         dispatch(fetchTasksFail(err));
       });
     };
@@ -43,12 +41,10 @@ export const addTaskItem = (title, position, projectID) => {
     dispatch(fetchTasksStart());
     auth.instanceAxios().post('/projects/' + projectID + '/tasks', {title: title, index: position})
       .then(response => {
-        console.log(response);
         auth.setHeadersStore(response);
         dispatch(addTaskItemSuccess(response.data, projectID));
       })
       .catch(err => {
-        console.log(err);
         dispatch(addTaskItemFail(err));
       });
   };
@@ -74,12 +70,10 @@ export const deleteTaskItem = (taskID, projectID) => {
     dispatch(fetchTasksStart());
     auth.instanceAxios().delete('/projects/' + projectID + '/tasks/' + taskID)
       .then(response => {
-        console.log(response);
         auth.setHeadersStore(response);
         dispatch(removeTaskItemSuccess(projectID, taskID));
       })
       .catch(err => {
-        console.log(err);
         dispatch(removeTaskItemFail(err));
       });
   };
@@ -105,12 +99,10 @@ export const editTaskItem = (taskID, projectID, data) => {
     dispatch(fetchTasksStart());
     auth.instanceAxios().put('/projects/' + projectID + '/tasks/' + taskID, data)
       .then(response => {
-        console.log(response);
         auth.setHeadersStore(response);
         dispatch(editTaskItemSuccess(projectID, taskID, response.data));
       })
       .catch(err => {
-        console.log(err);
         dispatch(editTaskItemFail(err));
       });
   };
@@ -137,13 +129,10 @@ export const sortingTaskItems = (projectID, items, tasks) => {
     dispatch(fetchTasksStart());
     auth.instanceAxios().post('/projects/' + projectID + '/sorting', {tasks: items})
       .then(response => {
-        console.log(response.data);
         auth.setHeadersStore(response);
-        console.log(tasks);
         dispatch(sortingTaskItemSuccess(tasks));
       })
       .catch(err => {
-        console.log(err);
         dispatch(sortingTaskItemFail(err));
       });
   };
